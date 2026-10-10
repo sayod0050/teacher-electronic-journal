@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teacher Journal</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">School Management</p>
+          <h1>Electronic Journal</h1>
+        </div>
+        <div class="topbar-actions">
+          <span class="status-dot"></span>
+          <span>Teacher Panel</span>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="summary-cards">
+          <article class="card accent-blue">
+            <span>Total Classes</span>
+            <strong id="total-classes">0</strong>
+          </article>
+          <article class="card accent-green">
+            <span>Total Students</span>
+            <strong id="total-students">0</strong>
+          </article>
+          <article class="card accent-purple">
+            <span>Lessons Planned</span>
+            <strong id="total-lessons">0</strong>
+          </article>
+          <article class="card accent-orange">
+            <span>Average Grade</span>
+            <strong id="avg-grade">0%</strong>
+          </article>
+        </section>
+
+        <section class="panel-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Classes</h2>
+            </div>
+            <form id="class-form" class="stack-form">
+              <div class="input-row">
+                <label>
+                  Class Name
+                  <input type="text" id="class-name" placeholder="e.g. Grade 8-A" required />
+                </label>
+              </div>
+              <div class="dual-row">
+                <label>
+                  Grade Level
+                  <input type="text" id="class-grade" placeholder="e.g. 8" />
+                </label>
+                <label>
+                  Classroom
+                  <input type="text" id="class-room" placeholder="Room 12" />
+                </label>
+              </div>
+              <label>
+                Teacher
+                <input type="text" id="class-teacher" placeholder="Teacher's name" required />
+              </label>
+              <button type="submit" class="primary-btn">Add Class</button>
+            </form>
+            <div id="class-list" class="list-container"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Students</h2>
+            </div>
+            <form id="student-form" class="stack-form">
+              <label>
+                Full Name
+                <input type="text" id="student-name" placeholder="Student name" required />
+              </label>
+              <label>
+                Class
+                <select id="student-class" required></select>
+              </label>
+              <div class="dual-row">
+                <label>
+                  Parent Name
+                  <input type="text" id="parent-name" placeholder="Parent name" />
+                </label>
+                <label>
+                  Parent Phone
+                  <input type="tel" id="parent-phone" placeholder="+123456789" />
+                </label>
+              </div>
+              <label>
+                Parent Email
+                <input type="email" id="parent-email" placeholder="parent@email.com" />
+              </label>
+              <button type="submit" class="primary-btn">Add Student</button>
+            </form>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <h2>Lessons / Schedule</h2>
+            </div>
+            <form id="lesson-form" class="stack-form">
+              <label>
+                Lesson Title
+                <input type="text" id="lesson-title" placeholder="e.g. Literature" required />
+              </label>
+              <label>
+                Class
+                <select id="lesson-class" required></select>
+              </label>
+              <div class="dual-row">
+                <label>
+                  Day
+                  <select id="lesson-day">
+                    <option>Monday</option>
+                    <option>Tuesday</option>
+                    <option>Wednesday</option>
+                    <option>Thursday</option>
+                    <option>Friday</option>
+                  </select>
+                </label>
+                <label>
+                  Time
+                  <input type="time" id="lesson-time" value="09:00" />
+                </label>
+              </div>
+              <label>
+                Teacher
+                <input type="text" id="lesson-teacher" placeholder="Teacher name" />
+              </label>
+              <button type="submit" class="primary-btn">Add Lesson</button>
+            </form>
+            <div id="lesson-list" class="list-container"></div>
+          </article>
+
+          <article class="panel wide-panel">
+            <div class="panel-heading">
+              <h2>Marks / Grades</h2>
+            </div>
+            <form id="grade-form" class="stack-form">
+              <div class="dual-row">
+                <label>
+                  Student
+                  <select id="grade-student" required></select>
+                </label>
+                <label>
+                  Class
+                  <select id="grade-class" required></select>
+                </label>
+              </div>
+              <div class="dual-row">
+                <label>
+                  Lesson
+                  <select id="grade-lesson" required></select>
+                </label>
+                <label>
+                  Assessment
+                  <input type="text" id="grade-assessment" placeholder="Classwork / Test" required />
+                </label>
+              </div>
+              <div class="dual-row">
+                <label>
+                  Mark (%)
+                  <input type="number" id="grade-mark" min="0" max="100" value="80" required />
+                </label>
+                <label>
+                  Date
+                  <input type="date" id="grade-date" required />
+                </label>
+              </div>
+              <button type="submit" class="primary-btn">Save Grade</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="panel table-panel">
+          <div class="panel-heading heading-inline">
+            <h2>Student Journal</h2>
+            <select id="table-class-filter">
+              <option value="all">All classes</option>
+            </select>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Student</th>
+                  <th>Class</th>
+                  <th>Parent</th>
+                  <th>Lessons</th>
+                  <th>Average</th>
+                  <th>Latest Mark</th>
+                </tr>
+              </thead>
+              <tbody id="student-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
